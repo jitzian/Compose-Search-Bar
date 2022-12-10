@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Rocket Giant</string>
+    <string name="back_TEXT">Back</string>
+    <string name="time_out_error_TEXT">Your request exceeded the TIME OUT. Please try again</string>
+    <string name="generic_error_TEXT">An error occurred on our end. Please Try Later</string>
+    <string name="loading_dot_dot_dot_TEXT">Loading…</string>
+    <string name="no_internet_connection_TEXT">No Internet Connection…</string>
+    <string name="there_is_no_data_available_TEXT">There is no data available</string>
+    <string name="n_a_TEXT">There is no data available</string>
+    <string name="error_code_not_available_TEXT">There is no data available</string>
+
+    <!--Testing tags: ErrorScreen-->
+    <string name="errorScreen_broken_robot_test_TAG">broken_robot_test_TAG</string>
+    <string name="errorScreen_error_text_test_TAG">errorScreen_error_text_test_TAG</string>
+
+    <!--Testing tags: AddressRow-->
+    <string name="addressRow_text_address_test_TAG">addressRow_text_address_test_TAG</string>
+    <string name="addressRow_text_address_value_test_TAG">addressRow_text_address_value_test_TAG</string>
+
+    <!--Testing tags: ArrowBackIcon-->
+    <string name="arrowBackIcon_iconButton_test_TAG">arrowBackIcon_iconButton_test_TAG</string>
+    <string name="arrowBackIcon_text_back_test_TAG">arrowBackIcon_text_back_test_TAG</string>
+
+
 </resources>
