@@ -19,7 +19,10 @@ import com.example.rocketgiant.ui.common.*
 import com.example.rocketgiant.ui.screens.main.viewmodel.MainViewModel
 
 @Composable
-fun MainScreenState(mainViewModel: MainViewModel = hiltViewModel()) {
+fun MainScreenState(
+    mainViewModel: MainViewModel = hiltViewModel(),
+    navigateToDetails: (String, String) -> Unit
+) {
 
     val state by mainViewModel.state.collectAsState()
     mainViewModel.fetchGames()
@@ -29,7 +32,10 @@ fun MainScreenState(mainViewModel: MainViewModel = hiltViewModel()) {
             LoadingScreen()
         }
         is MainViewModel.UIState.Success -> {
-            MainScreen(data = ((state as MainViewModel.UIState.Success).data))
+            MainScreen(
+                data = ((state as MainViewModel.UIState.Success).data),
+                navigateToDetails = navigateToDetails
+            )
         }
         is MainViewModel.UIState.Error -> {
             ErrorScreen(message = (state as MainViewModel.UIState.Error).message)
@@ -38,7 +44,7 @@ fun MainScreenState(mainViewModel: MainViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun <T : Result> MainScreen(data: List<T>) {
+fun <T : Result> MainScreen(data: List<T>, navigateToDetails: (String, String) -> Unit) {
     val state = rememberLazyListState()
     val scope = rememberCoroutineScope()
     RocketScreensApp {
@@ -55,7 +61,10 @@ fun <T : Result> MainScreen(data: List<T>) {
         ) {
             LazyColumn(state = state) {
                 items(data) { item ->
-                    RowItem(data = item)
+                    RowItem(
+                        data = item,
+                        onItemClick = { navigateToDetails(item.name ?: "", item.deck ?: "") }
+                    )
                 }
             }
             ScrollFloatingButton(state = state, coroutineScope = scope, data = data)

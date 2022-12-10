@@ -20,7 +20,7 @@ fun DetailsScreenState(
     detailsViewModel: DetailsViewModel = hiltViewModel(),
     nameParam: String,
     deckParam: String,
-    imageUrlParam: String,
+    imageUrlParam: String? = "",
     onBackButton: () -> Unit
 ) {
 
