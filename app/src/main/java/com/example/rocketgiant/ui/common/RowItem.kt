@@ -2,7 +2,6 @@
 
 package com.example.rocketgiant.ui.common
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -26,7 +25,7 @@ import com.example.rocketgiant.R
 import com.example.rocketgiant.data.remote.model.Result
 
 @Composable
-fun <T : Result> RowItem(data: T) {
+fun <T : Result> RowItem(data: T, onItemClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -36,7 +35,7 @@ fun <T : Result> RowItem(data: T) {
                 vertical = dimensionResource(id = R.dimen.dimen_8_dp)
             )
             .clickable {
-                Log.e("RowItem", "RowItem: clicked..!!")
+                onItemClick.invoke()
             },
         elevation = dimensionResource(id = R.dimen.dimen_4_dp)
     ) {
@@ -90,6 +89,9 @@ fun PrevRowItem() {
         data = Result(
             name = "SEGA AGES 2500 Vol.13: OutRun",
             deck = "SEGA AGES 2500 Vol.13: OutRun is a remake of the arcade classic as part of the Sega Ages series. This version was included in the Sega Classics Collection when released in America and Europe."
-        )
+        ),
+        onItemClick = {
+            //Empty on purpose
+        }
     )
 }
