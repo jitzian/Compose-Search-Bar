@@ -6,7 +6,7 @@
     <string name="loading_dot_dot_dot_TEXT">Loading…</string>
     <string name="no_internet_connection_TEXT">No Internet Connection…</string>
     <string name="there_is_no_data_available_TEXT">There is no data available</string>
-    <string name="n_a_TEXT">There is no data available</string>
+    <string name="n_a_TEXT">N/A</string>
     <string name="error_code_not_available_TEXT">There is no data available</string>
     <string name="scroll_down_TEXT">Scroll Down</string>
     <string name="scroll_up_TEXT">Scroll Down</string>
