@@ -33,8 +33,6 @@ class MainViewModel @Inject constructor(
                     if (input.isNotEmpty()) {
                         delay(3000L)
                         _state.value = UIState.Success(
-                            data = emptyList(),
-                            searchInput = input,
                             isLoading = true
                         )
                     }
@@ -82,8 +80,8 @@ class MainViewModel @Inject constructor(
     sealed class UIState {
         object Empty : UIState()
         class Success(
-            val data: List<Result>,
-            val searchInput: String,
+            val data: List<Result> = emptyList(),
+            val searchInput: String = "",
             val isLoading: Boolean = true
         ) : UIState()
         class Error(val code: String? = null, val message: String) : UIState()
