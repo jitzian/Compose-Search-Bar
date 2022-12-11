@@ -1,6 +1,5 @@
 package com.example.rocketgiant.ui.screens.details.views
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
@@ -26,18 +26,12 @@ import com.example.rocketgiant.ui.screens.details.viewmodel.DetailsViewModel
 
 @Composable
 fun DetailsScreenState(
-    detailsViewModel: DetailsViewModel = hiltViewModel(),
-    nameParam: String,
-    deckParam: String,
-    imageUrlParam: String? = "https://www.giantbomb.com/a/uploads/square_avatar/8/84290/2764528-3772727124-44466.jpg",
-    onBackButton: () -> Unit
+    id: Int,
+    onBackButton: () -> Unit,
+    detailsViewModel: DetailsViewModel = hiltViewModel()
 ) {
-    Log.e("DetailsScreenState", "DetailsScreenState: $nameParam")
-    Log.e("DetailsScreenState", "DetailsScreenState: $deckParam")
-    Log.e("DetailsScreenState", "DetailsScreenState: $imageUrlParam")
-
     val state by detailsViewModel.state.collectAsState()
-    detailsViewModel.prepareData(name = nameParam, deck = deckParam, imageUrl = imageUrlParam)
+    detailsViewModel.fetchGameDetailsById(id)
 
     when (state) {
         is DetailsViewModel.UIState.Loading -> {
@@ -67,7 +61,8 @@ fun DetailsScreen(
     RocketScreensApp {
         Scaffold(topBar = {
             MainTopBar(
-                barTitle = nameParam, showBackButton = true,
+                barTitle = stringResource(id = R.string.details_TEXT),
+                showBackButton = true,
                 onBackClick = onBackButton
             )
         }) {
@@ -110,7 +105,5 @@ fun PrevDetailsScreen() {
         nameParam = "Something about SEGA",
         deckParam = "SEGA AGES 2500 Vol.13: OutRun is a remake of the arcade classic as part of the Sega Ages series. This version was included in the Sega Classics Collection when released in America and Europe.",
         imageUrlParam = "https://www.giantbomb.com/a/uploads/square_avatar/8/84290/2764528-3772727124-44466.jpg"
-    ) {
-
-    }
+    ) { /*Empty on purpose*/ }
 }

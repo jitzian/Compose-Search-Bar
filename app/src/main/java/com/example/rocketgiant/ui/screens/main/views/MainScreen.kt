@@ -33,7 +33,7 @@ import com.example.rocketgiant.ui.screens.main.viewmodel.MainViewModel
 
 @Composable
 fun MainScreenState(
-    navigateToDetails: (String, String) -> Unit,
+    navigateToDetails: (Int) -> Unit,
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
     val state by mainViewModel.state.collectAsState()
@@ -67,7 +67,7 @@ fun MainScreenState(
 
 @Composable
 fun <T : Result> MainScreen(
-    navigateToDetails: (String, String) -> Unit,
+    navigateToDetails: (Int) -> Unit,
     data: List<T>,
     isLoading: Boolean,
     searchInput: String,
@@ -156,12 +156,7 @@ fun <T : Result> MainScreen(
                         items(data) { item ->
                             RowItem(
                                 data = item,
-                                onItemClick = {
-                                    navigateToDetails(
-                                        item.name ?: "",
-                                        item.deck ?: ""
-                                    )
-                                }
+                                onItemClick = { navigateToDetails(item.id ?: 0) }
                             )
                         }
                     }
