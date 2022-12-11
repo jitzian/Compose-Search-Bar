@@ -10,6 +10,9 @@
     <string name="error_code_not_available_TEXT">There is no data available</string>
     <string name="scroll_down_TEXT">Scroll Down</string>
     <string name="scroll_up_TEXT">Scroll Down</string>
+    <string name="hint_search_query">Type</string>
+    <string name="search_icon_text_query">Search Icon</string>
+    <string name="clear_icon_text_query">Clear Icon</string>
 
     <!--Testing tags: ErrorScreen-->
     <string name="errorScreen_broken_robot_test_TAG">broken_robot_test_TAG</string>

@@ -22,26 +22,37 @@ class MainViewModel @Inject constructor(
     private val application: Application
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<UIState>(UIState.Loading)
+    private val _state = MutableStateFlow<UIState>(UIState.Empty)
     val state: StateFlow<UIState>
         get() = _state.asStateFlow()
 
-    fun fetchGames() = viewModelScope.launch {
+    fun fetchGames(input: String) = viewModelScope.launch {
+        Log.e(this@MainViewModel.TAG(), "fetchGames::input::$input")
         try {
             withTimeout(MAX_TIMEOUT) {
                 withContext(Dispatchers.IO) {
-                    if (state.value == UIState.Loading) {
-                        val data = gamesRepository.fetchGames("game boy")
-                        if (data.results.isNotEmpty()) {
-                            _state.value = UIState.Success(
-                                data = data.results
-                            )
-                        } else {
-                            _state.value = UIState.Error(
-                                code = ErrorStates.NO_DATA_AVAILABLE.type,
-                                message = application.resources.getString(R.string.there_is_no_data_available_TEXT)
-                            )
-                        }
+                    if (input.isNotEmpty()) {
+                        delay(3000L)
+                        //_state.value = UIState.Loading
+                        _state.value = UIState.Success(
+                            data = emptyList(),
+                            searchInput = input,
+                            isLoading = true
+                        )
+                    }
+
+                    val data = gamesRepository.fetchGames(input)
+                    if (data.results.isNotEmpty()) {
+                        _state.value = UIState.Success(
+                            data = data.results,
+                            searchInput = input,
+                            isLoading = false
+                        )
+                    } else {
+                        _state.value = UIState.Error(
+                            code = ErrorStates.NO_DATA_AVAILABLE.type,
+                            message = application.resources.getString(R.string.there_is_no_data_available_TEXT),
+                        )
                     }
                 }
             }
@@ -71,8 +82,9 @@ class MainViewModel @Inject constructor(
     }
 
     sealed class UIState {
-        object Loading : UIState()
-        class Success(val data: List<Result>) : UIState()
+        object Empty : UIState()
+        //object Loading : UIState()
+        class Success(val data: List<Result>, val searchInput: String, val isLoading: Boolean = true) : UIState()
         class Error(val code: String? = null, val message: String) : UIState()
     }
 
