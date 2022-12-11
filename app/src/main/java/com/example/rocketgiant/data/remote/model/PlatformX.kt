@@ -1,8 +1,10 @@
 package com.example.rocketgiant.data.remote.model
 
-
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class PlatformX(
     @SerializedName("abbreviation")
     val abbreviation: String? = null,
@@ -14,4 +16,4 @@ data class PlatformX(
     val name: String? = null,
     @SerializedName("site_detail_url")
     val siteDetailUrl: String? = null
-)
+) : Parcelable

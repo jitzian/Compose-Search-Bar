@@ -1,8 +1,10 @@
 package com.example.rocketgiant.data.remote.model
 
-
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Results(
     @SerializedName("aliases")
     val aliases: String? = "",
@@ -23,9 +25,9 @@ data class Results(
     @SerializedName("developers")
     val developers: List<Developer>? = listOf(),
     @SerializedName("expected_release_day")
-    val expectedReleaseDay: Any? = Any(),
+    val expectedReleaseDay: String? = "",
     @SerializedName("expected_release_month")
-    val expectedReleaseMonth: Any? = Any(),
+    val expectedReleaseMonth: String? = "",
     @SerializedName("expected_release_quarter")
     val expectedReleaseQuarter: Int? = 0,
     @SerializedName("expected_release_year")
@@ -54,8 +56,6 @@ data class Results(
     val imageTags: List<ImageTagX>? = listOf(),
     @SerializedName("images")
     val images: List<ImageXX>? = listOf(),
-    @SerializedName("killed_characters")
-    val killedCharacters: Any? = Any(),
     @SerializedName("locations")
     val locations: List<Location>? = listOf(),
     @SerializedName("name")
@@ -67,7 +67,7 @@ data class Results(
     @SerializedName("original_game_rating")
     val originalGameRating: List<OriginalGameRatingX>? = listOf(),
     @SerializedName("original_release_date")
-    val originalReleaseDate: Any? = Any(),
+    val originalReleaseDate: String? = "",
     @SerializedName("people")
     val people: List<People>? = listOf(),
     @SerializedName("platforms")
@@ -82,4 +82,4 @@ data class Results(
     val siteDetailUrl: String? = "",
     @SerializedName("videos")
     val videos: List<Video>? = listOf()
-)
+) : Parcelable

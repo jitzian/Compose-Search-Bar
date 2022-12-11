@@ -1,7 +1,10 @@
 package com.example.rocketgiant.data.remote.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class ResultApi(
     @SerializedName("error")
     val error: String,
@@ -19,4 +22,4 @@ data class ResultApi(
     val statusCode: Int,
     @SerializedName("version")
     val version: String
-)
+) : Parcelable

@@ -1,7 +1,10 @@
 package com.example.rocketgiant.data.remote.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Image(
     @SerializedName("icon_url")
     val iconUrl: String,
@@ -23,4 +26,4 @@ data class Image(
     val thumbUrl: String,
     @SerializedName("tiny_url")
     val tinyUrl: String
-)
+) : Parcelable

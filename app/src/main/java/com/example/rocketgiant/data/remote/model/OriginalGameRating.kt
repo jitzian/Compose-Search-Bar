@@ -1,7 +1,10 @@
 package com.example.rocketgiant.data.remote.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class OriginalGameRating(
     @SerializedName("api_detail_url")
     val apiDetailUrl: String,
@@ -9,4 +12,4 @@ data class OriginalGameRating(
     val id: Int,
     @SerializedName("name")
     val name: String
-)
+) : Parcelable

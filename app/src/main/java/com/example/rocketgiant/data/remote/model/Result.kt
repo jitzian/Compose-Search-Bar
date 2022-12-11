@@ -1,7 +1,10 @@
 package com.example.rocketgiant.data.remote.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Result(
     @SerializedName("aliases")
     val aliases: String? = "",
@@ -16,9 +19,9 @@ data class Result(
     @SerializedName("description")
     val description: String? = "",
     @SerializedName("expected_release_day")
-    val expectedReleaseDay: Any? = null,
+    val expectedReleaseDay: String? = null,
     @SerializedName("expected_release_month")
-    val expectedReleaseMonth: Any? = null,
+    val expectedReleaseMonth: String? = null,
     @SerializedName("expected_release_quarter")
     val expectedReleaseQuarter: Int? = null,
     @SerializedName("expected_release_year")
@@ -43,4 +46,4 @@ data class Result(
     val platforms: List<Platform>? = null,
     @SerializedName("site_detail_url")
     val siteDetailUrl: String? = ""
-)
+) : Parcelable
