@@ -1,0 +1,13 @@
+package com.example.rocketgiant.data.remote.model
+
+
+import com.google.gson.annotations.SerializedName
+
+data class OriginalGameRatingX(
+    @SerializedName("api_detail_url")
+    val apiDetailUrl: String? = null,
+    @SerializedName("id")
+    val id: Int? = null,
+    @SerializedName("name")
+    val name: String? = null
+)
