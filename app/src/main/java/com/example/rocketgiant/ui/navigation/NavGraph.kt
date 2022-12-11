@@ -27,8 +27,8 @@ private fun addMainScreen(
 ) {
     navGraphBuilder.composable(route = Screens.MainNavScreen.route) {
         MainScreenState(
-            navigateToDetails = { nameParam, deckParam ->
-                navController.navigate(Screens.DetailsNavScreen.withArgs(nameParam, deckParam))
+            navigateToDetails = { id ->
+                navController.navigate(Screens.DetailsNavScreen.withArgs(id.toString()))
             }
         )
     }
@@ -40,22 +40,17 @@ private fun addDetailsScreen(
 ) {
     navGraphBuilder.composable(
         route = Screens.DetailsNavScreen.withArgsFormat(
-            Screens.DetailsNavScreen.nameParam,
-            Screens.DetailsNavScreen.deckParam
+            Screens.DetailsNavScreen.id
         ),
         arguments = listOf(
-            navArgument(Screens.DetailsNavScreen.nameParam) {
-                type = NavType.StringType
-            },
-            navArgument(Screens.DetailsNavScreen.deckParam) {
-                type = NavType.StringType
+            navArgument(Screens.DetailsNavScreen.id) {
+                type = NavType.IntType
             }
         )
     ) { navBackStackEntry ->
         val args = navBackStackEntry.arguments
         DetailsScreenState(
-            nameParam = args?.getString(Screens.DetailsNavScreen.nameParam) ?: "",
-            deckParam = args?.getString(Screens.DetailsNavScreen.deckParam) ?: "",
+            id = args?.getInt(Screens.DetailsNavScreen.id) ?: 0,
             onBackButton = {
                 navController.popBackStack()
             }
