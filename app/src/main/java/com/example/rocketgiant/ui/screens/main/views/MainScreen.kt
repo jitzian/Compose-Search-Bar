@@ -25,6 +25,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.rocketgiant.R
+import com.example.rocketgiant.constants.GlobalConstants.Companion.MAX_LINES
 import com.example.rocketgiant.data.remote.model.Result
 import com.example.rocketgiant.ui.app.RocketScreensApp
 import com.example.rocketgiant.ui.common.*
@@ -49,9 +50,6 @@ fun MainScreenState(
                 fetchGames = fetchGames
             )
         }
-        /*is MainViewModel.UIState.Loading -> {
-            LoadingScreen()
-        }*/
         is MainViewModel.UIState.Success -> {
             MainScreen(
                 navigateToDetails = navigateToDetails,
@@ -88,6 +86,7 @@ fun <T : Result> MainScreen(
     } else if (query.isNotEmpty()) {
         showClearIcon = true
     }
+
     RocketScreensApp {
         Scaffold(
             topBar = {
@@ -108,7 +107,6 @@ fun <T : Result> MainScreen(
                 if (isLoading) {
                     LoadingScreen()
                 } else {
-
                     //----------------------------------------
                     //InputSearchBar(fetchGames, searchInput)
                     TextField(
@@ -119,8 +117,6 @@ fun <T : Result> MainScreen(
                             // To avoid crash, only query when string isn't empty.
                             if (onQueryChanged.isNotEmpty()) {
                                 // Pass latest query to refresh search results.
-                                //viewModel.performQuery(onQueryChanged)
-                                //mainViewModel.fetchGames(onQueryChanged)
                                 fetchGames.invoke(onQueryChanged)
                             }
                         },
@@ -142,7 +138,7 @@ fun <T : Result> MainScreen(
                                 }
                             }
                         },
-                        maxLines = 1,
+                        maxLines = MAX_LINES,
                         colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.Transparent),
                         placeholder = { Text(text = stringResource(R.string.hint_search_query)) },
                         textStyle = MaterialTheme.typography.subtitle1,
@@ -169,11 +165,10 @@ fun <T : Result> MainScreen(
                             )
                         }
                     }
-                    if (data.isNotEmpty()) {
-                        ScrollFloatingButton(state = state, coroutineScope = scope, data = data)
-                    }
                 }
-
+            }
+            if (data.isNotEmpty()) {
+                ScrollFloatingButton(state = state, coroutineScope = scope, data = data)
             }
         }
     }

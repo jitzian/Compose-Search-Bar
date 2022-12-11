@@ -27,13 +27,11 @@ class MainViewModel @Inject constructor(
         get() = _state.asStateFlow()
 
     fun fetchGames(input: String) = viewModelScope.launch {
-        Log.e(this@MainViewModel.TAG(), "fetchGames::input::$input")
         try {
             withTimeout(MAX_TIMEOUT) {
                 withContext(Dispatchers.IO) {
                     if (input.isNotEmpty()) {
                         delay(3000L)
-                        //_state.value = UIState.Loading
                         _state.value = UIState.Success(
                             data = emptyList(),
                             searchInput = input,
@@ -83,8 +81,11 @@ class MainViewModel @Inject constructor(
 
     sealed class UIState {
         object Empty : UIState()
-        //object Loading : UIState()
-        class Success(val data: List<Result>, val searchInput: String, val isLoading: Boolean = true) : UIState()
+        class Success(
+            val data: List<Result>,
+            val searchInput: String,
+            val isLoading: Boolean = true
+        ) : UIState()
         class Error(val code: String? = null, val message: String) : UIState()
     }
 
